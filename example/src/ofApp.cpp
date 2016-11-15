@@ -8,7 +8,7 @@ void ofApp::setup(){
     
     ofAddListener(http.newResponseEvent, this, &ofApp::newResponse);
     http.start();
-    jwt.setup(&http, "admin", "admin", "http://somewebsite.com/someservice");
+    jwt.setup(&http, "admin", "DJv33GZ$mJBQC;G4Ha6DsXWJCnzqdoLbEm4g", "http://gestigare-test.apigee.net/howmany");
     ofAddListener(jwt.evToken, this, &ofApp::onToken);
 }
 
@@ -19,10 +19,10 @@ void ofApp::newResponse(ofxHttpResponse &response){
 
 void ofApp::onToken(){
     map<string, string> data;
-    data["data1"] = "blablabla";
-    data["data2"] = "1";
-    data["data3"] = "something";
-    jwt.sendData("/someotherpath", data);
+    data["counter"] = "italy.abruzzo.auchan1.in";
+    data["value"] = "1";
+    data["timestamp"] = "0000000000000";
+    jwt.sendData("/counter", data);
 }
 
 //--------------------------------------------------------------

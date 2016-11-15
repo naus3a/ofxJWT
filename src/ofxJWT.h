@@ -35,6 +35,7 @@ public:
     virtual void sendData(string endPoint, map<string, string> data);
     
     virtual void getResponse(ofxHttpResponse & response);
+    virtual string getDataField(string fieldName, ofBuffer & data);
     
     virtual bool isSuccess(int httpStatus){return (httpStatus>=200&&httpStatus<300);}
     virtual bool isToken(ofBuffer & data);
