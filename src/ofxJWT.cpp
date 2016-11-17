@@ -52,13 +52,13 @@ void ofxJWT::sendData(string endPoint, map<string, string> data){
 string ofxJWT::getDataField(string fieldName, ofBuffer & data){
     string rs = "";
     string s = data.getFirstLine();
-    size_t found = s.find(fieldName);
+    size_t found = s.find("\""+fieldName+"\"");
     if(found!=string::npos){
         size_t start = found+fieldName.size()+2;
         string ss = s.substr(start, s.size()-start);
         vector<string> sv = ofSplitString(ss, ",");
         if(sv.size()>0){
-            rs = sv[0].substr(1, sv[0].size()-2);
+            rs = sv[0].substr(2, sv[0].size()-3);
         }
     }
     return rs;
