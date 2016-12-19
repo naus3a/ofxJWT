@@ -17,11 +17,13 @@ ofxJWT::~ofxJWT(){
     http = NULL;
 }
 
-void ofxJWT::setup(ofxHttpUtils * _http, string _user, string _pass, string _url){
+void ofxJWT::setup(ofxHttpUtils * _http, string _user, string _pass, string _url, string _tokenEP, string _dataEP){
     http=_http;
     user=_user;
     password=_pass;
     url=_url;
+    tokenEndPoint = _tokenEP;
+    dataEndPoint = _dataEP;
 }
 
 void ofxJWT::post(string endPoint, const ofBuffer & body){
@@ -41,7 +43,7 @@ void ofxJWT::askToken(){
     ss << "}\n";
     string s = ss.str();
     body.set(s.c_str(), s.size());
-    post("/login", body);
+    post(tokenEndPoint, body);
 }
 
 void ofxJWT::sendData(string endPoint, map<string, string> data){

@@ -27,7 +27,8 @@ class ofxJWT{
 public:
     ofxJWT();
     ~ofxJWT();
-    virtual void setup(ofxHttpUtils * _http, string _user, string _pass, string _url);
+    virtual void setup(ofxHttpUtils * _http, string _user, string _pass, string _url, string _tokenEP="", string _dataEP="");
+    
     virtual void post(string endPoint, const ofBuffer & body);
     virtual void post(string endPoint, const ofBuffer & body, map<string, string> headers);
     
@@ -44,11 +45,16 @@ public:
     virtual map<string, string> makeTokenHeader();
     virtual ofBuffer makeDataBody(map<string, string> data);
     
+    string getTokenEndPoint(){return tokenEndPoint;}
+    string getDataEndPoint(){return dataEndPoint;}
+    
     ofEvent<void> evToken;
 protected:
     ofxHttpUtils * http;
     string user;
     string password;
     string url;
+    string tokenEndPoint;
+    string dataEndPoint;
     string token;
 };
