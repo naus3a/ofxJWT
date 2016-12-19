@@ -35,13 +35,15 @@ void ofxJWT::post(string endPoint, const ofBuffer &body, map<string, string> hea
 }
 
 void ofxJWT::askToken(){
+    cout<<"Asking Token:"<<endl;
     ofBuffer body;
     std::stringstream ss;
     ss << "{\n";
-    ss << " \"username\":\""<<user<<"\",\n";
+    ss << " \"login\":\""<<user<<"\",\n";
     ss << " \"password\":\""<<password<<"\"\n";
     ss << "}\n";
     string s = ss.str();
+    cout<<s<<endl;
     body.set(s.c_str(), s.size());
     post(tokenEndPoint, body);
 }
@@ -68,13 +70,13 @@ string ofxJWT::getDataField(string fieldName, ofBuffer & data){
 
 bool ofxJWT::isToken(ofBuffer & data){
     string s = data.getFirstLine();
-    return s.substr(0,7)=="{\"JWT\":";
+    return s.substr(0,22)=="{\"success\":true,\"JWT\":";
 }
 
 void ofxJWT::setToken(ofBuffer & data){
     string s = data.getFirstLine();
-    int sz = s.size()-8;
-    string s0 = s.substr(8,sz);
+    int sz = s.size()-23;
+    string s0 = s.substr(23,sz);
     vector<string> sTok = ofSplitString(s0,"\"");
     token = sTok[0];
 }
